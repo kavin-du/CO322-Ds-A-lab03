@@ -34,7 +34,7 @@ public class Chart extends Application {
 
 		lineChart.getData().add(bucketData);
 		
-		Scene scene = new Scene(lineChart, 500, 500);
+		Scene scene = new Scene(lineChart, 1000, 500);
 		
 		window.setScene(scene);
 		window.show();		

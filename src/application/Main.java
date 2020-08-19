@@ -37,7 +37,7 @@ class Main {
 	public static void main(String args[]) {
 		readFile("sample-text1.txt");
 
-		HashTableImp table = new HashTableImp(100);
+		HashTableImp table = new HashTableImp(200);
 
 		for(String word : list){
 			table.insert(word);
@@ -50,7 +50,7 @@ class Main {
 //			System.out.print(bucket_status.get(i)+" ");
 //		}
 		
-//		Chart.launch(Chart.class, args);
+		Chart.launch(Chart.class, args);
 		
 	}
 

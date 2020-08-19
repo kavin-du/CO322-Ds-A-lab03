@@ -1,37 +1,35 @@
 package application;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/*********************************************
- * 
- * CO322: Data structures and algorithms
- * 
- * Implementation of the hashTable
- *********************************************/
-
-
-class HashTableImp implements HashTable {
+public class HashTableImp2 implements HashTable {
 
 	private ArrayList<LinkedList<Word>> table;
 	private int buckets;    
 
-	public HashTableImp(int buckets) {
+	public HashTableImp2(int buckets) {
 		
 	// create a open hash table with given number of buckets 
 		this.table = new ArrayList<LinkedList<Word>>();
-		this.buckets = buckets;
+		this.buckets = setBuckets(buckets);
 		for(int i=0; i<buckets; i++){
 			this.table.add(null);
 		}
 	}
 	
+	public int setBuckets(int buckets) {
+		double value = Math.log(buckets)/Math.log(2);
+		if(value-Math.floor(value) == 0) {
+			return buckets;
+		}
+		
+		int r = (int) Math.ceil(value);
+		return (int) Math.pow(2, r);
+		
+	}
 	
-	/* insert the given key to a open hash tabled.     
-	 * With each key you have a count of how many times it     
-	 * was inserted 
-     
-	 */
-   
+	
 	@Override
 	public void insert(String key){
 		key = key.toLowerCase();
@@ -59,16 +57,8 @@ class HashTableImp implements HashTable {
 			}
 		}
 		
-
 	}
-
-    
-	/* given the key return the number of times it was inserted 
-     
-	 * to the table 
-     
-	*/
-    
+	
 	@Override
 	public int search(String key){
 		key = key.toLowerCase();
@@ -95,7 +85,12 @@ class HashTableImp implements HashTable {
 		// if(key.equals("houses")){
 		// 	System.out.println(sumOfAscii);
 		// }
-		return sumOfAscii%this.buckets;
+		double A = (Math.pow(5, 0.5)-1) / 2;
+		
+		int hash = (int) Math.floor(this.buckets*((sumOfAscii*A)%1));
+		
+		return hash;
+		
 	}
 	
 	public ArrayList<Integer> bucketStatus(){
@@ -112,8 +107,5 @@ class HashTableImp implements HashTable {
 		
 		return list;
 	}
-    
-
-
-
-}// end HashTableImp 
+	
+}

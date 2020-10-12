@@ -8,7 +8,7 @@ import java.util.Scanner;
  * 
  * Design: Implementing a hash table
  * 
- * Date: 11/10/2020
+ * Date: 12/10/2020
  * 
  * */
 
@@ -53,8 +53,12 @@ class Main {
 	}
 	public static void main(String args[]) throws Exception {
 		// path for the text file to be read
-		readFile("sample-text1.txt");
-		
+		try {
+			readFile("sample-text1.txt");
+		} catch (Exception e) {
+			System.out.println("Enter a valid path for file: "+e);
+		}
+				
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Enter number of buckets: ");

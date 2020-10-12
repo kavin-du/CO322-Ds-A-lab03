@@ -37,6 +37,7 @@ class HashTableImp implements HashTable {
 	@Override
 	public void insert(String key){
 		key = key.toLowerCase(); // convert string to lowercase
+//		if(key.equals("shall")) System.out.println(key);
 		int hashvalue = this.hashvalue(key); // generating hash value
 		
 		// get the relevant linked list for the given hash value
@@ -46,7 +47,7 @@ class HashTableImp implements HashTable {
 		if(temp == null){
 			temp = new LinkedList<>();
 			temp.add(new Word(key));
-			table.add(hashvalue, temp); 
+			table.set(hashvalue, temp); // updating the entry
 		} else {
 			// if the key is already present, then increment the value
 			boolean isAvailable = false;
@@ -54,13 +55,14 @@ class HashTableImp implements HashTable {
 				if(temp.get(i).getName().equals(key)){
 					temp.get(i).increment();
 					isAvailable = true;
-					table.add(hashvalue, temp); 
+					table.set(hashvalue, temp); // updating the entry
+					break;
 				}
 			}
 			// if the key is not present, add it
 			if(!isAvailable){
 				temp.add(new Word(key));
-				table.add(hashvalue, temp); 
+				table.set(hashvalue, temp); // updating the entry
 			}
 		}
 	}
@@ -76,19 +78,20 @@ class HashTableImp implements HashTable {
 	public int search(String key){
 		key = key.toLowerCase(); // convert key to lower case
 		int count = 0;
-		int hashvalue = this.hashvalue(key);
+		int hashvalue = this.hashvalue(key); // generate the hash value
+		// get the linked list corresponding to hash value
 		LinkedList<Word> temp = this.table.get(hashvalue);
 
-		if(!temp.isEmpty()){
+		if(!temp.isEmpty() && temp != null){
 			// linear searching for the given key
 			for(int i=0; i<temp.size(); i++){
 				if(temp.get(i).getName().equals(key)){
 					count = temp.get(i).getCount();
+					break;
 				}
 			}
 		}
 		return count;
-
 	}
 	
 	/*

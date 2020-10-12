@@ -34,10 +34,10 @@ public class Chart extends Application {
 		lineChart.setTitle("Content distribution over buckets");
 		
 		XYChart.Series bucketData1 = new XYChart.Series();
-		bucketData1.setName("1st hash function");
+		bucketData1.setName("1st hash function (division method)");
 		
 		XYChart.Series bucketData2 = new XYChart.Series();
-		bucketData2.setName("2nd hash function");
+		bucketData2.setName("2nd hash function (multiplication method)");
 		
 		// adding data of the 1st hash function
 		for(int i=0; i<this.data1.size(); i++) {
@@ -50,9 +50,11 @@ public class Chart extends Application {
 		}
 		
 		lineChart.getData().addAll(bucketData1, bucketData2);
+		bucketData1.getNode().setStyle("-fx-stroke-width: 2px;");
+		bucketData2.getNode().setStyle("-fx-stroke-width: 2px;");
 		lineChart.setCreateSymbols(false);
 		
-		Scene scene = new Scene(lineChart, 1000, 500);
+		Scene scene = new Scene(lineChart, 700, 500);
 		
 		window.setScene(scene);
 		window.show();		

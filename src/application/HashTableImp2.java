@@ -57,7 +57,7 @@ public class HashTableImp2 implements HashTable {
 		if(temp == null){
 			temp = new LinkedList<>();
 			temp.add(new Word(key));
-			table.add(hashvalue, temp); 
+			table.set(hashvalue, temp); // updating the entry
 		} else {
 			// check if the key is already present, then incrementing the count
 			boolean isAvailable = false;
@@ -65,13 +65,14 @@ public class HashTableImp2 implements HashTable {
 				if(temp.get(i).getName().equals(key)){
 					temp.get(i).increment();
 					isAvailable = true;
-					table.add(hashvalue, temp); 
+					table.set(hashvalue, temp); // updating the entry
+					break;
 				}
 			}
 			// if the key is not present, add it
 			if(!isAvailable){
 				temp.add(new Word(key));
-				table.add(hashvalue, temp); 
+				table.set(hashvalue, temp); // updating the entry
 			}
 		}
 	}
@@ -85,10 +86,11 @@ public class HashTableImp2 implements HashTable {
 		LinkedList<Word> temp = this.table.get(hashvalue);
 		
 		// getting the count of the given key
-		if(!temp.isEmpty()){
+		if(!temp.isEmpty() && temp != null){
 			for(int i=0; i<temp.size(); i++){
 				if(temp.get(i).getName().equals(key)){
 					count = temp.get(i).getCount();
+					break;
 				}
 			}
 		}
